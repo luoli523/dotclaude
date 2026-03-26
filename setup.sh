@@ -57,6 +57,14 @@ SYMLINK_FILES=(
     "settings.json"
     "settings.local.json"
     "statusline-command.sh"
+    "CLAUDE.md"
+)
+
+# Directories to symlink: source (relative to config/) -> target (relative to ~/.claude/)
+SYMLINK_DIRS=(
+    "commands"
+    "rules"
+    "agents"
 )
 
 # ============================================================
@@ -96,6 +104,21 @@ if $RESTORE; then
         fi
     fi
 
+    # Restore directories
+    for dir in "${SYMLINK_DIRS[@]}"; do
+        target="$CLAUDE_DIR/$dir"
+        backup="$LATEST/$dir"
+        if [[ -d "$backup" ]]; then
+            if $DRY_RUN; then
+                info "Would restore $dir/"
+            else
+                rm -rf "$target"
+                cp -R "$backup" "$target"
+                ok "Restored $dir/"
+            fi
+        fi
+    done
+
     ok "Restore complete from $LATEST"
     exit 0
 fi
@@ -125,6 +148,13 @@ for file in "${SYMLINK_FILES[@]}" config.json; do
         break
     fi
 done
+for dir in "${SYMLINK_DIRS[@]}"; do
+    target="$CLAUDE_DIR/$dir"
+    if [[ -d "$target" ]] && [[ ! -L "$target" ]]; then
+        needs_backup=true
+        break
+    fi
+done
 
 if $needs_backup; then
     if ! $DRY_RUN; then
@@ -138,6 +168,17 @@ if $needs_backup; then
             else
                 cp "$target" "$BACKUP_DIR/$file"
                 ok "  Backed up $file"
+            fi
+        fi
+    done
+    for dir in "${SYMLINK_DIRS[@]}"; do
+        target="$CLAUDE_DIR/$dir"
+        if [[ -d "$target" ]] && [[ ! -L "$target" ]]; then
+            if $DRY_RUN; then
+                info "  Would backup $dir/"
+            else
+                cp -R "$target" "$BACKUP_DIR/$dir"
+                ok "  Backed up $dir/"
             fi
         fi
     done
@@ -187,6 +228,49 @@ for file in "${SYMLINK_FILES[@]}"; do
         else
             ln -s "$source" "$target"
             ok "  Created symlink: $file -> $source"
+        fi
+    fi
+done
+
+# --- Step 2b: Symlink directories ---
+info "Step 2b: Symlinking directories..."
+
+for dir in "${SYMLINK_DIRS[@]}"; do
+    source="$CONFIG_DIR/$dir"
+    target="$CLAUDE_DIR/$dir"
+
+    if [[ ! -d "$source" ]]; then
+        warn "  Source not found: $source — skipping"
+        continue
+    fi
+
+    if [[ -L "$target" ]]; then
+        current=$(readlink "$target")
+        if [[ "$current" == "$source" ]]; then
+            info "  $dir/ — already linked"
+            continue
+        fi
+        if $DRY_RUN; then
+            info "  Would update symlink: $dir/"
+        else
+            rm "$target"
+            ln -s "$source" "$target"
+            ok "  Updated symlink: $dir/ -> $source"
+        fi
+    elif [[ -d "$target" ]]; then
+        if $DRY_RUN; then
+            info "  Would replace $dir/ with symlink"
+        else
+            rm -rf "$target"
+            ln -s "$source" "$target"
+            ok "  Replaced with symlink: $dir/ -> $source"
+        fi
+    else
+        if $DRY_RUN; then
+            info "  Would create symlink: $dir/"
+        else
+            ln -s "$source" "$target"
+            ok "  Created symlink: $dir/ -> $source"
         fi
     fi
 done
