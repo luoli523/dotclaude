@@ -1,0 +1,8 @@
+# Skills repo is cloned at setup time, not versioned here
+my_claude_skills/
+
+# OS
+.DS_Store
+
+# Claude local state
+.claude/
