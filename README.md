@@ -16,7 +16,7 @@ cd ~/dev/git/dotclaude
 2. **Symlink 文件** — `settings.json`、`settings.local.json`、`statusline-command.sh`、`CLAUDE.md` → `~/.claude/`
 3. **Symlink 目录** — `commands/`、`rules/`、`agents/` → `~/.claude/`
 4. **渲染** `config.json` — 从模板替换 `{{HOME}}` 为实际路径
-5. **安装 Skills** — 自动 clone [my_claude_skills](https://github.com/luoli523/my_claude_skills) 并执行其 `install.sh`
+5. **安装 Skills** — 自动 clone [my_all_skills](https://github.com/luoli523/my_all_skills) 并执行其 `install.sh`
 6. **同步 Plugins** — 复制插件注册表，Claude Code 首次启动时自动拉取插件
 
 ## setup.sh 用法
@@ -85,7 +85,7 @@ dotclaude/
 │   ├── agents/                  # 个人 agents
 │   └── skills/                  # 个人 skills 模板
 ├── project-template/            # init-project.sh 使用的模板
-├── my_claude_skills/            # setup 时自动 clone（.gitignored）
+├── my_all_skills/               # setup 时自动 clone（.gitignored）
 └── README.md
 ```
 
@@ -229,7 +229,7 @@ skills/
 
 `SKILL.md` 的 `description` 字段决定了 Claude 何时触发此 skill，需要写得具体（包含关键词）。
 
-> **注意**：大量 skills 通过 [my_claude_skills](https://github.com/luoli523/my_claude_skills) 管理，此处仅存放模板和不属于那个仓库的个人 skills。
+> **注意**：大量 skills 通过 [my_all_skills](https://github.com/luoli523/my_all_skills) 管理，此处仅存放模板和不属于那个仓库的个人 skills。
 
 ---
 

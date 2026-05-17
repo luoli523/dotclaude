@@ -49,8 +49,8 @@ warn()  { echo -e "${YELLOW}[warn]${NC}  $*"; }
 err()   { echo -e "${RED}[error]${NC} $*"; }
 
 # --- Skills repo config ---
-SKILLS_REPO="https://github.com/luoli523/my_claude_skills.git"
-SKILLS_DIR="$SCRIPT_DIR/my_claude_skills"
+SKILLS_REPO="https://github.com/luoli523/my_all_skills.git"
+SKILLS_DIR="$SCRIPT_DIR/my_all_skills"
 
 # Files to symlink: source (relative to config/) -> target (relative to ~/.claude/)
 SYMLINK_FILES=(
@@ -299,7 +299,7 @@ fi
 
 # --- Step 4: Install skills ---
 if ! $SKIP_SKILLS; then
-    info "Step 4: Installing skills from my_claude_skills..."
+    info "Step 4: Installing skills from my_all_skills..."
 
     if [[ -d "$SKILLS_DIR/.git" ]]; then
         info "  Updating existing clone..."
