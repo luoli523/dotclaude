@@ -7,7 +7,7 @@
     "pr": ""
   },
   "includeCoAuthoredBy": false,
-  "model": "sonnet",
+  "model": "claude-opus-4-7",
   "hooks": {
     "Stop": [
       {
