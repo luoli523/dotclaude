@@ -43,6 +43,7 @@ copy_if_missing() {
 # CLAUDE.md and CLAUDE.local.md at project root
 copy_if_missing "$TEMPLATE_DIR/CLAUDE.md" "$TARGET_DIR/CLAUDE.md"
 copy_if_missing "$TEMPLATE_DIR/CLAUDE.local.md" "$TARGET_DIR/CLAUDE.local.md"
+copy_if_missing "$TEMPLATE_DIR/AGENTS.md" "$TARGET_DIR/AGENTS.md"
 
 # .claude/ structure
 copy_if_missing "$TEMPLATE_DIR/.claude/settings.json" "$TARGET_DIR/.claude/settings.json"

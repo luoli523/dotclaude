@@ -2,9 +2,31 @@
 set -euo pipefail
 
 # dotclaude — Claude Code environment setup
-# Usage: ./setup.sh [--dry-run] [--skip-skills] [--restore]
+# Usage: ./setup.sh [--claude|--codex|--all] [--dry-run] [--skip-skills] [--restore]
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Route provider selection before parsing Claude-specific options below.  The
+# default installs both runtimes; --claude preserves the previous behavior.
+PROVIDER="all"
+FORWARDED_ARGS=()
+for arg in "$@"; do
+    case "$arg" in
+        --claude) PROVIDER="claude" ;;
+        --codex) PROVIDER="codex" ;;
+        --all) PROVIDER="all" ;;
+        *) FORWARDED_ARGS+=("$arg") ;;
+    esac
+done
+
+if [[ "$PROVIDER" == "all" ]]; then
+    "$SCRIPT_DIR/setup.sh" --claude "${FORWARDED_ARGS[@]}"
+    "$SCRIPT_DIR/setup-codex.sh" "${FORWARDED_ARGS[@]}"
+    exit 0
+elif [[ "$PROVIDER" == "codex" ]]; then
+    exec "$SCRIPT_DIR/setup-codex.sh" "${FORWARDED_ARGS[@]}"
+fi
+
 CLAUDE_DIR="$HOME/.claude"
 CONFIG_DIR="$SCRIPT_DIR/config"
 
