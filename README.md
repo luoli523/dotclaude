@@ -1,6 +1,6 @@
 # dotclaude
 
-我的 Claude Code 环境配置。在任何新机器上 clone 此仓库并运行 `setup.sh`，即可恢复完整的 Claude Code 偏好设置。
+我的 Claude Code 与 Codex 环境配置。在任何新机器上 clone 此仓库并运行 `setup.sh`，即可恢复两套工具的可移植偏好设置。
 
 ## Quick Start
 
@@ -10,19 +10,23 @@ cd ~/dev/git/dotclaude
 ./setup.sh
 ```
 
-首次运行会自动完成以下操作：
+首次运行默认同时配置 Claude Code 与 Codex：
 
 1. **备份** 已有的 `~/.claude/` 配置文件和目录
 2. **Symlink 文件** — `settings.json`、`settings.local.json`、`statusline-command.sh`、`CLAUDE.md` → `~/.claude/`
 3. **Symlink 目录** — `commands/`、`rules/`、`agents/` → `~/.claude/`
 4. **渲染** `config.json` — 从模板替换 `{{HOME}}` 为实际路径
 5. **安装 Skills** — 自动 clone [my_all_skills](https://github.com/luoli523/my_all_skills) 并执行其 `install.sh`
-6. **同步 Plugins** — 复制插件注册表，Claude Code 首次启动时自动拉取插件
+6. **同步 Claude Plugins** — 复制插件注册表，Claude Code 首次启动时自动拉取插件
+7. **配置 Codex** — 备份并生成 `~/.codex/config.toml`，软链接全局 `AGENTS.md`
 
 ## setup.sh 用法
 
 ```bash
-./setup.sh                 # 完整安装
+./setup.sh                 # 安装 Claude Code 与 Codex
+./setup.sh --claude        # 仅安装 Claude Code
+./setup.sh --codex         # 仅安装 Codex
+./setup.sh --all           # 明确安装两者（默认行为）
 ./setup.sh --dry-run       # 预览变更，不实际执行
 ./setup.sh --skip-skills   # 跳过 skills 安装（仅配置文件）
 ./setup.sh --restore       # 从最近的备份还原（撤销 setup）
@@ -73,7 +77,7 @@ your-project/
 dotclaude/
 ├── setup.sh                     # 全局环境安装脚本
 ├── init-project.sh              # 项目脚手架生成器
-├── config/                      # → symlink 到 ~/.claude/
+├── config/
 │   ├── settings.json            # 全局设置
 │   ├── settings.local.json      # 权限白名单
 │   ├── config.json.tmpl         # MCP servers 配置模板
@@ -83,11 +87,20 @@ dotclaude/
 │   ├── commands/                # 个人 slash 命令
 │   ├── rules/                   # 全局规则
 │   ├── agents/                  # 个人 agents
-│   └── skills/                  # 个人 skills 模板
+│   ├── skills/                  # 个人 skills 模板
+│   └── codex/                   # → 配置到 ~/.codex/
+│       ├── AGENTS.md            # Codex 全局指令
+│       └── config.toml.tmpl     # Codex 可移植偏好
 ├── project-template/            # init-project.sh 使用的模板
 ├── my_all_skills/               # setup 时自动 clone（.gitignored）
 └── README.md
 ```
+
+### Codex 配置边界
+
+Codex 使用自己的 `~/.codex/` 目录和 TOML 配置格式，因此不会复用 Claude 的 `settings.json`、插件注册表或 slash commands。安装器只管理可跨机器复用的 `config.toml` 与 `AGENTS.md`，不会覆盖认证信息、项目可信记录、插件缓存、会话或本机通知设置。
+
+项目脚手架会同时创建 `CLAUDE.md` 和 `AGENTS.md`：前者供 Claude Code 使用，后者供 Codex 使用。两者应保留相同的项目事实与团队规则，但可以包含各运行时特有的说明。
 
 ---
 
