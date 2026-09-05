@@ -27,7 +27,33 @@
     "command": "bash $HOME/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true
+    "frontend-design@claude-plugins-official": true,
+    "baoyu-skills@baoyu-skills": true,
+    "agent-skills@addy-agent-skills": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "guige@guige-skills": true
   },
-  "effortLevel": "high"
+  "extraKnownMarketplaces": {
+    "baoyu-skills": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/JimLiu/baoyu-skills.git"
+      }
+    },
+    "addy-agent-skills": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/addyosmani/agent-skills.git"
+      }
+    },
+    "guige-skills": {
+      "source": {
+        "source": "github",
+        "repo": "luoli523/guige-skills"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true
 }

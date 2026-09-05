@@ -354,4 +354,4 @@ info "Skills:  managed by $SKILLS_DIR"
 info "Backup:  ${BACKUP_DIR:-'(none needed)'}"
 echo
 info "To undo: ./setup.sh --restore"
-$DRY_RUN && warn "(dry-run mode — no changes were made)"
+if $DRY_RUN; then warn "(dry-run mode — no changes were made)"; fi

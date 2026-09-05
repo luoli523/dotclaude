@@ -7,8 +7,47 @@
         "installPath": "/Users/li.luo/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
         "version": "unknown",
         "installedAt": "2026-03-08T11:13:43.988Z",
-        "lastUpdated": "2026-03-26T02:38:58.866Z",
+        "lastUpdated": "2026-09-05T06:20:36.555Z",
         "gitCommitSha": "205b6e0b30366a969412d9aab7b99bea99d58db1"
+      }
+    ],
+    "baoyu-skills@baoyu-skills": [
+      {
+        "scope": "user",
+        "installPath": "/Users/li.luo/.claude/plugins/cache/baoyu-skills/baoyu-skills/5d2a39c636c1",
+        "version": "5d2a39c636c1",
+        "installedAt": "2026-05-20T06:06:02.759Z",
+        "lastUpdated": "2026-05-20T06:06:02.759Z",
+        "gitCommitSha": "5d2a39c636c1c374b2ae5f72648a0df4be1ad0f7"
+      }
+    ],
+    "agent-skills@addy-agent-skills": [
+      {
+        "scope": "user",
+        "installPath": "/Users/li.luo/.claude/plugins/cache/addy-agent-skills/agent-skills/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-20T06:06:07.566Z",
+        "lastUpdated": "2026-05-20T06:06:07.566Z",
+        "gitCommitSha": "f17c6e88c904dc747381c374312c2d58e10647ae"
+      }
+    ],
+    "claude-code-setup@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/li.luo/.claude/plugins/cache/claude-plugins-official/claude-code-setup/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-20T07:14:47.223Z",
+        "lastUpdated": "2026-05-20T07:14:47.223Z"
+      }
+    ],
+    "guige@guige-skills": [
+      {
+        "scope": "user",
+        "installPath": "/Users/li.luo/.claude/plugins/cache/guige-skills/guige/0.3.0",
+        "version": "0.3.0",
+        "installedAt": "2026-05-20T15:24:40.399Z",
+        "lastUpdated": "2026-08-17T10:28:49.801Z",
+        "gitCommitSha": "e3c4f009f09c1da9af4aebee399f4f45b041250a"
       }
     ]
   }
