@@ -31,15 +31,6 @@
         "gitCommitSha": "f17c6e88c904dc747381c374312c2d58e10647ae"
       }
     ],
-    "claude-code-setup@claude-plugins-official": [
-      {
-        "scope": "user",
-        "installPath": "/Users/li.luo/.claude/plugins/cache/claude-plugins-official/claude-code-setup/1.0.0",
-        "version": "1.0.0",
-        "installedAt": "2026-05-20T07:14:47.223Z",
-        "lastUpdated": "2026-05-20T07:14:47.223Z"
-      }
-    ],
     "guige@guige-skills": [
       {
         "scope": "user",
