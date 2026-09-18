@@ -7,7 +7,6 @@
     "pr": ""
   },
   "includeCoAuthoredBy": false,
-  "model": "claude-opus-4-7",
   "hooks": {
     "Stop": [
       {
@@ -55,5 +54,6 @@
   },
   "effortLevel": "high",
   "tui": "fullscreen",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "model": "claude-fable-5-1[1m]"
 }
